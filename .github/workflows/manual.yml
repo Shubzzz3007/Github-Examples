@@ -1,0 +1,33 @@
+name: To trigger manaully
+
+on:
+  workflow_dispatch:
+    inputs:
+        environment:
+          type: choice
+          description: 'Please select the environment'
+          options:
+            - development
+            - staging
+            - production
+          required: true
+          default: 'production'
+        
+        run_tests:
+          type: boolean
+          description: 'Run tests before deployment'
+          required: false
+          default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Diplay environment
+        run: echo "Selected environment is ${{ github.event.inputs.environment }}"   
+      - name: Check if tests should be run
+        if: ${{ github.event.inputs.run_tests == 'true' }}
+        run: echo "Running tests..."
+      - name: Skip tests
+        if: ${{ github.event.inputs.run_tests == 'false' }}
+        run: echo "Skipping tests..."
