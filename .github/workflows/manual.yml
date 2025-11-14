@@ -22,7 +22,7 @@ on:
         Displayed-Name:
           type: string
           description: 'Pass a name here'
-          required: false
+          required: true
           default: 'Shubham'
 
 jobs:
