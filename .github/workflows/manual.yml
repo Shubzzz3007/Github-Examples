@@ -19,6 +19,12 @@ on:
           required: false
           default: true
 
+        Displayed-Name:
+          type: string
+          description: 'Pass a name here'
+          required: false
+          default: 'Shubham'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -31,3 +37,5 @@ jobs:
       - name: Skip tests
         if: ${{ github.event.inputs.run_tests == 'false' }}
         run: echo "Skipping tests..."
+      - name: Display name
+        run: echo "Hello, ${{ github.event.inputs['Displayed-Name'] }}!"
