@@ -1,0 +1,19 @@
+name: This is to trigger WF for repository dispatch
+
+on:
+    repository_dispatch:
+      types: [start-manual-workflow]
+
+jobs:
+  trigger-manual-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Manual Workflow
+        run: echo "Event Type :${{ github.event.action }}"
+      
+      - name: Print the payload data
+        run: |
+          echo "Payload Data:"
+          echo "Environment: ${{ github.event.client_payload.environment }}"
+          echo "Run Tests: ${{ github.event.client_payload.run_tests }}"
+          echo "Displayed Name: ${{ github.event.client_payload['Displayed-Name'] }}"
