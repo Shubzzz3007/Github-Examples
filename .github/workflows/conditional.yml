@@ -18,4 +18,4 @@ jobs:
               if: github.event.inputs.run_tests == 'true'
             - name: Skip Deployment
               run: echo "run_tests is false , Skipping Deployment..."
-
+              if: github.event.inputs.run_tests == 'false'
