@@ -1,4 +1,4 @@
-name: TO run only if commit message has Deploy in it
+name: TO run  only if commit message has Deploy in it
 
 on:
   push:
