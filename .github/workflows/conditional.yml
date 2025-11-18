@@ -1,21 +1,15 @@
-name: TO run only if run_tests is true
+name: TO run only if commit message has Deploy in it
 
 on:
-  workflow_dispatch:
-    inputs:
-        run_tests:
-            type: boolean
-            description: 'Run tests before deployment'
-            required: true
-            default: true
+  push:
 
 jobs:
     conditional-job:
         runs-on: ubuntu-latest
         steps:
             - name: Deploy
-              run: echo "run_tests is true , Deploying to main..."
-              if: github.event.inputs.run_tests == 'true'
+              run: echo "Commit message has Deploy , Deploying to main..."
+              if: contains(github.event.head_commit.message,'Deploy') 
             - name: Skip Deployment
-              run: echo "run_tests is false , Skipping Deployment..."
-              if: github.event.inputs.run_tests == 'false'
+              run: echo "Skipping Deployment..."
+              if: contains(github.event.head_commit.message,'Deploy') == false
