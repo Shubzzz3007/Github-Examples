@@ -10,6 +10,9 @@ jobs:
             - name: Deploy
               run: echo "Commit message has Deploy , Deploying to main..."
               if: contains(github.event.head_commit.message,'Deploy') 
-            - name: Skip Deployment
-              run: echo "Skipping Deployment..."
-              if: contains(github.event.head_commit.message,'Deploy') == false
+            - name: If job success
+              run: echo "Job Succeeded!"
+              if: success()
+            - name: If job failed
+              run: echo "Job Failed!"
+              if: failure()
