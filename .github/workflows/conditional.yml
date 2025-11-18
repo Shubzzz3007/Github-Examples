@@ -9,7 +9,7 @@ jobs:
         steps:
             - name: Deploy
               run: echo "Commit message has Deploy , Deploying to main..."
-              if: contains(github.event.head_commit.message,'Deploy') 
+              if: github.ref == 'refs/heads/test' && contains(github.event.head_commit.message,'Deploy') 
             - name: If job success
               run: echo "Job Succeeded!"
               if: success()
