@@ -1,0 +1,13 @@
+name: TO run on conditional statement
+
+on:
+  push:
+
+jobs:
+    conditional-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy
+              run: echo "Deploying to main..."
+              if: github.ref == 'refs/heads/main'
+
