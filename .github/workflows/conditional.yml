@@ -1,13 +1,21 @@
-name: TO run on conditional statement
+name: TO run only if run_tests is true
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+        run_tests:
+            type: boolean
+            description: 'Run tests before deployment'
+            required: true
+            default: true
 
 jobs:
     conditional-job:
         runs-on: ubuntu-latest
         steps:
             - name: Deploy
-              run: echo "Deploying to main..."
-              if: github.ref == 'refs/heads/main'
+              run: echo "run_tests is true , Deploying to main..."
+              if: github.event.inputs.run_tests == 'true'
+            - name: Skip Deployment
+              run: echo "run_tests is false , Skipping Deployment..."
 
