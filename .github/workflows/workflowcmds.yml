@@ -8,9 +8,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Set env value
-          run: echo "MY_VAL = Shubh env" >> $GITHUB_ENV
+          run: echo "MY_VAL = Shubhenv" >> $GITHUB_ENV
         - name: Echo env value
-          run: echo "The env value is $MY_VAL"
+          run: echo "The env value is {{ $MY_VAL }}"
         - name: To set output value for next step
           run: echo "OUTPUT_VAL = {{ $MYVAL }}" >> $GITHUB_OUTPUT
         - name: Echo output value
