@@ -1,0 +1,52 @@
+name: to check each workflow cmds
+
+on:
+    push:
+
+jobs:
+    check-workflow-cmds:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Set env value
+          run: echo "MY_VAL = Shubh env" >> $GITHUB_ENV
+        - name: Echo env value
+          run: echo "The env value is $MY_VAL"
+        - name: To set output value for next step
+          run: echo "OUTPUT_VAL = {{ $MYVAL }}" >> $GITHUB_OUTPUT
+        - name: Echo output value
+          run: echo "The output value is $OUTPUT_VAL"
+        - name: Add maskd secret value
+          run: echo "::add-mask::MY_SECRET_VALUE"
+        - name: Echo masked secret value
+          run: echo "The secret value is MY_SECRET_VALUE"
+        - name: To debug workflow
+          run: |
+            echo "Debugging Info:"
+            echo "GitHub Repository: $GITHUB_REPOSITORY"
+            echo "GitHub Actor: $GITHUB_ACTOR"
+            echo "GitHub Event Name: $GITHUB_EVENT_NAME"
+            echo "GitHub SHA: $GITHUB_SHA"
+            echo "GitHub Ref: $GITHUB_REF"
+            echo "GitHub Workflow: $GITHUB_WORKFLOW"
+            echo "GitHub Job: $GITHUB_JOB"
+            echo "GitHub Run ID: $GITHUB_RUN_ID"
+            echo "GitHub Run Number: $GITHUB_RUN_NUMBER"
+            echo "GitHub Workspace: $GITHUB_WORKSPACE"
+            echo "GitHub Action: $GITHUB_ACTION"
+            echo "GitHub Event Path: $GITHUB_EVENT_PATH"
+            echo "GitHub Base Ref: $GITHUB_BASE_REF"
+            echo "GitHub Head Ref: $GITHUB_HEAD_REF"
+        - name: warning message
+          run: echo "::warning::This is a warning message"
+        - name: error message
+          run: echo "::error::This is an error message"
+        - name: group logs
+          run: |
+            echo "::group::My Grouped Logs"
+            echo "This is the first log line in the group."
+            echo "This is the second log line in the group."
+            echo "::endgroup::"
+        - name: pause for 10 seconds
+          run: sleep 10
+        - name: Add path to runner
+          run: echo "/home/runner/my-custom-bin" >> $GITHUB_PATH
